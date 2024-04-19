@@ -32,27 +32,6 @@ sub check_package_dependencies {
 }
 
 sub has_deborphan {
-    return system("which deborphan > /dev/null") == 0;
-}
-
-sub install_deborphan {
-    print colored("deborphan is not installed. Do you want to install it? (y/n): ", 'yellow'), "\n";
-    chomp(my $response = <STDIN>);
-    if ($response eq 'y') {
-        system("sudo apt-get install deborphan");
-        return 1; # Successfully initiated installation
-    } else {
-        print colored("Skipping orphaned packages cleanup.", 'red'), "\n";
-        return 0; # Did not initiate installation
-    }
-}
-
-sub execute_option {
-    my $choice = shift;
-
-    if ($choice == 1) {
-        print colored("Updating package database and upgrading all packages...", 'yellow'), "\n";
-        system("sudo apt update && sudo apt upgrade");
     } elsif ($choice == 2) {
         print colored("Removing a package and its dependencies...", 'yellow'), "\n";
         print "Enter the package name you want to remove: ";
